@@ -13,13 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+
 Route::get('/', function () {
     return view('login');
 });
-
-Route::get('/refund', function () {
-    return view('refund');
-})->name('app.refund');
 
 Route::get('/pending', function () {
     return view('pending');
@@ -28,3 +26,15 @@ Route::get('/pending', function () {
 Route::get('/history', function () {
     return view('history');
 })->name('app.history');
+
+Auth::routes();
+
+Route::get('home', [App\Http\Controllers\RefundController::class, 'index'])->name('app.refund');
+
+Route::get('admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
+
+Route::get('admin/login', [App\Http\Controllers\Auth\AdminLoginController::class, 'index'])->name('admin.login');
+
+Route::post('admin/login', [App\Http\Controllers\Auth\AdminLoginController::class, 'login'])->name('admin.login.submit');
+
+//Route::get('/admin', 'AdminController@index')->name('homeadmin');
