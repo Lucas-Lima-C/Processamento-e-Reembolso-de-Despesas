@@ -36,5 +36,3 @@ Route::get('admin', [App\Http\Controllers\AdminController::class, 'index'])->nam
 Route::get('admin/login', [App\Http\Controllers\Auth\AdminLoginController::class, 'index'])->name('admin.login');
 
 Route::post('admin/login', [App\Http\Controllers\Auth\AdminLoginController::class, 'login'])->name('admin.login.submit');
-
-//Route::get('/admin', 'AdminController@index')->name('homeadmin');

@@ -45,7 +45,7 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<!-- Left Side Of Navbar -->
 				<ul class="navbar-nav mr-auto">
-
+					
 				</ul>
 
 				<!-- Right Side Of Navbar -->
@@ -60,7 +60,7 @@
 
 						@if (Route::has('register'))
 							<li class="nav-item">
-								<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+								<a class="nav-link" href="{{ route('register') }}">{{ __('Registre-se!') }}</a>
 							</li>
 						@endif
 						@else
@@ -89,65 +89,25 @@
 	</nav>
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100">
-				<div class="login100-pic js-tilt" data-tilt>
+			<div class="wrap-login100" style="position: absolute; width:60%; height:65%">
+				<span class="login100-form-title" style="position: absolute; top:7%; right:0%">
+					Escolha seu tipo de Login:
+				</span>
+				<div class="login100-pic js-tilt" style="width:35%; position: absolute; top:20%; right:52% " data-tilt>
 					<img src="images/img-01.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form">
-					<span class="login100-form-title">
-						Login
-					</span>
+				<div class="login100-pic js-tilt" style="position: absolute; top:20%; left:47%; width: 48%" data-tilt>
+					<img src="images/transparent.png" alt="IMG">
+				</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						</span>
-					</div>
+				<a href="/login" class="btn btn-info" style="background-color:rgb(83, 211, 9); position: absolute; top:85%; right:62%" role="button">Funcionário</a>
 
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
-					</div>
-					
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
-					</div>
+				<a href="/admin/login" class="btn btn-info" style="background-color:blue; position: absolute; top:85%; right:21%; width:16%"  role="button">Gestor</a>
 
-					<div class="text-center p-t-12">
-						<span class="txt1">
-							Forgot
-						</span>
-						<a class="txt2" href="#">
-							Username / Password?
-						</a>
-					</div>
-
-					<div class="text-center p-t-136">
-						<a class="txt2" href="#">
-							Create your Account
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
-					</div>
-				</form>
 			</div>
 		</div>
-		<div>
-            <!--
-            <a href="{{route('app.pending')}}">Pending</a><br>
-            <a href="{{route('app.history')}}">History</a><br>-->
-        </div>
 	</div>
-	
-	
-
 	
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
