@@ -25,8 +25,6 @@ Route::get('home', [App\Http\Controllers\RefundController::class, 'index'])->nam
 
 Route::get('admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
 
-Route::get('pending', [App\Http\Controllers\PendingController::class, 'index'])->name('app.pending');
-
 Route::get('history', [App\Http\Controllers\HistoryController::class, 'index'])->name('app.history');
 
 Route::get('admin/login', [App\Http\Controllers\Auth\AdminLoginController::class, 'index'])->name('admin.login');
