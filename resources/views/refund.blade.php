@@ -55,12 +55,6 @@
 					<li class="nav-item">
 						<a class="nav-link" href="{{route('app.refund')}}">Refund</a>
 					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="{{route('app.pending')}}">Pending</a>
-					  </li>
-					  <li class="nav-item">
-						  <a class="nav-link" href="{{route('app.history')}}">History</a>
-						</li>
 				</ul>
 
 				<!-- Right Side Of Navbar -->
