@@ -17,7 +17,7 @@
     <div class="card border">
             <div class="card-body">
                 <span class="login100-form-title" style="padding:25px; padding-top:0">
-                    Reembolsos pendentes
+                    Reembolsos Pendentes
                 </span>
             <table>
                     <thead>
