@@ -17,8 +17,9 @@ class CreateExpenses extends Migration
             $table->id();
             $table->unsignedBigInteger('refund_id');
             $table->foreign('refund_id')->references('id')->on('refunds');
-            $table->double('value');
-            $table->integer('expense_type');
+            $table->float('value');
+            $table->unsignedBigInteger('expense_type_id');
+            $table->foreign('expense_type_id')->references('id')->on('expense_types');
             $table->timestamps();
         });
     }

@@ -23,15 +23,29 @@ Auth::routes();
 
 Route::get('home', [App\Http\Controllers\RefundController::class, 'index'])->name('app.refund');
 
-Route::get('home/Success', [App\Http\Controllers\RefundController::class, 'Success'])->name('app.Success');
+//Envio de Reembolso
 
-Route::post('home/Success', [App\Http\Controllers\RefundController::class, 'store'])->name('app.Success');
+Route::post('home/storeRefund', [App\Http\Controllers\RefundController::class, 'storeRefund'])->name('app.Success');
+
+//Cadastro de Tipo
+
+Route::get('home/TypeInput', [App\Http\Controllers\Expense_TypeController::class, 'index'])->name('app.TypeInput');
+
+Route::post('home/TypeInput', [App\Http\Controllers\Expense_TypeController::class, 'storeTypeInput'])->name('app.TypeInput');
+
+//Rotas do Gestor
+
+Route::get('admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
 
 Route::get('history', [App\Http\Controllers\HistoryController::class, 'index'])->name('app.history');
 
-//Rotas de Admin
+route::post('admin/approve/{id}', [App\Http\Controllers\AdminController::class, 'approve'])->name('admin.approve');
 
-Route::get('admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
+route::post('admin/deny/{id}', [App\Http\Controllers\AdminController::class, 'deny'])->name('admin.deny');
+
+route::get('admin/details/{id}', [App\Http\Controllers\AdminController::class, 'details'])->name('admin.details');
+
+//Rotas de Login
 
 Route::get('admin/login', [App\Http\Controllers\Auth\AdminLoginController::class, 'index'])->name('admin.login');
 

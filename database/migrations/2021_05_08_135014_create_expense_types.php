@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRefunds extends Migration
+class CreateExpenseTypes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateRefunds extends Migration
      */
     public function up()
     {
-        Schema::create('refunds', function (Blueprint $table) {
+        Schema::create('expense_types', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('status_type_id');
-            $table->foreign('status_type_id')->references('id')->on('status_types');
-            $table->float('totalValue');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateRefunds extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('refunds');
+        Schema::dropIfExists('expense_types');
     }
 }

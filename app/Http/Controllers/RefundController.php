@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Refund;
 use App\Models\Expense;
+use App\Models\Expense_Type;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,17 +28,17 @@ class RefundController extends Controller
      */
     public function index()
     {
-        return view('refund');
+        $expense_types = Expense_Type::all();
+        return view('refund', compact('expense_types'));
     }
 
-    public function store(Request $request){
+    public function storeRefund(Request $request){
 
-        $sessionRefund_id = 0;
-        $sessionUser_id = 0;
-        $totalValue = 0;
+        $sessionRefund_id = 0; //Para Expense - count
+        $totalValue = 0; //Para Refund
         $userInput = false;
 
-        //Conferindo se existe um Refund e criando o valor de ID para ser utilizado pelo Expense
+        //Conferindo se existe um Refund e criando o valor de ID para ser utilizado pelo Expense (O expense depende de um Refund para ser criado)
 
         $count = DB::table('refunds')->count();
 
@@ -51,23 +52,27 @@ class RefundController extends Controller
 
         $sessionUser_id = Auth::id();
 
-        //Inserindo dados iniciais do Reembolso
+        //Pegando o ID do status "Pending"
+
+        $status_Types = DB::table('status_types')->where('id', 1)->value('id');
+
+        //Inserindo dados iniciais do -reembolso-
         
         for($i = 0; $i < 4; $i++){
-
+            //Checando se algum valor foi inserido
             if($request->input("expensevalue{$i}") != 0){
                 $refund = new Refund();
                 $refund->id = $sessionRefund_id;
                 $refund->user_id = $sessionUser_id;
-                $refund->totalValue = 0;
-                $refund->status = 0;
+                $refund->totalValue = 1;
+                $refund->status_type_id = $status_Types;
                 $refund->save();
                 $i = 4;
                 $userInput = true;
             }
         }
 
-        //Inserindo as despesas na DB
+        //Inserindo as -despesas- na DB
 
         for($i = 0; $i < 4; $i++){
             //Checando se tem algum valor inserido
@@ -76,7 +81,7 @@ class RefundController extends Controller
                 $expense->refund_id = $refund->id;
                 $expense->value = $request->input("expensevalue{$i}");
                 $totalValue += $request->input("expensevalue{$i}");
-                $expense->expense_type = $request->input("expensetype{$i}");
+                $expense->expense_type_id = $request->input("expensetype{$i}");
                 $expense->save();
             }
         }
@@ -86,14 +91,10 @@ class RefundController extends Controller
         if($userInput == true){
             $refund->totalValue = $totalValue;
             $refund->save();
-            return redirect('home/Success');
+
+            return redirect('home')->with('error', "Solicitação de reembolso enviada com sucesso!");
         } else {
             return redirect('home')->with('error', "Nenhum valor foi digitado, por favor tente novamente.");
         }
-
-    }
-
-    public function Success(){
-        return view('Success');
     }
 }
