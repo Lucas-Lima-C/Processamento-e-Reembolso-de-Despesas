@@ -51,7 +51,15 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('app.refund')}}">Reembolso</a>
+                          </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.dashboard')}}">Pendentes</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="{{route('app.history')}}">Histórico</a>
+                            </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -99,22 +107,22 @@
     </div>
     
 
-<!--===============================================================================================-->	
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->	
+	<script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js') }}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="{{ asset('vendor/bootstrap/js/popper.js') }}"></script>
+	<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
+	<script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/tilt/tilt.jquery.min.js"></script>
+	<script src="{{ asset('vendor/tilt/tilt.jquery.min.js') }}"></script>
 	<script >
 		$('.js-tilt').tilt({
 			scale: 1.1
 		})
 	</script>
 <!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	<script src="{{ asset('js/main.js') }}"></script>
 
 </body>
 </html>

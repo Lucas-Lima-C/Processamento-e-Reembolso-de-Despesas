@@ -30,16 +30,12 @@ class RefundController extends Controller
         return view('refund');
     }
 
-    public function newRefund()
-    {
-        return view('newRefund');
-    }
-
     public function store(Request $request){
 
         $sessionRefund_id = 0;
         $sessionUser_id = 0;
         $totalValue = 0;
+        $userInput = false;
 
         //Conferindo se existe um Refund e criando o valor de ID para ser utilizado pelo Expense
 
@@ -55,24 +51,21 @@ class RefundController extends Controller
 
         $sessionUser_id = Auth::id();
 
-        //Criando os dados do novo Refund que ainda não vao ser inseridos na DB
-
-        session(['refund' => [
-            'id' => $sessionRefund_id,
-            'user_id' => $sessionUser_id,
-            'totalValue' => 0,
-            'status' => 0
-        ]]);
-
         //Inserindo dados iniciais do Reembolso
+        
+        for($i = 0; $i < 4; $i++){
 
-        $refund = new Refund();
-        $refund->id = $sessionRefund_id;
-        $refund->user_id = $sessionUser_id;
-        $refund->totalValue = 0;
-        $refund->status = 0;
-        $refund->save();
-
+            if($request->input("expensevalue{$i}") != 0){
+                $refund = new Refund();
+                $refund->id = $sessionRefund_id;
+                $refund->user_id = $sessionUser_id;
+                $refund->totalValue = 0;
+                $refund->status = 0;
+                $refund->save();
+                $i = 4;
+                $userInput = true;
+            }
+        }
 
         //Inserindo as despesas na DB
 
@@ -90,10 +83,13 @@ class RefundController extends Controller
 
         //Inserindo valor total do Reembolso e salvando
 
-        $refund->totalValue = $totalValue;
-        $refund->save();
-
-        return redirect('home/Success');
+        if($userInput == true){
+            $refund->totalValue = $totalValue;
+            $refund->save();
+            return redirect('home/Success');
+        } else {
+            return redirect('home')->with('error', "Nenhum valor foi digitado, por favor tente novamente.");
+        }
 
     }
 
