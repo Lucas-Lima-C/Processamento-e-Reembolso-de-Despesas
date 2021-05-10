@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Refund;
 use App\Models\Status_Type;
 use Illuminate\Support\Facades\DB;
+use App\Models\Expense;
 
 class AdminController extends Controller
 {
@@ -47,8 +48,10 @@ class AdminController extends Controller
 
         $refund = Refund::find($id);
 
+        $expenses = Expense::all()->where('refund_id', $id);
+
         if(isset($refund)){
-            return view('details', compact('refund'));
+            return view('details', compact('refund'), compact('expenses'));
         }
 
         return redirect('admin');

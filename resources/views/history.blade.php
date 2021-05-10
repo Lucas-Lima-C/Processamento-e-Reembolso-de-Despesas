@@ -12,6 +12,7 @@
       border: 1px solid #dddddd;
       text-align: left;
       padding: 8px;
+      text-align:center
     }
 </style>
     <div class="card border">

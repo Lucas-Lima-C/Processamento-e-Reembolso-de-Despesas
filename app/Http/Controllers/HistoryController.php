@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Refund;
+use App\Models\Expense;
 
 class HistoryController extends Controller
 {
@@ -21,8 +22,10 @@ class HistoryController extends Controller
 
         $refund = Refund::find($id);
 
+        $expenses = Expense::all()->where('refund_id', $id);
+
         if(isset($refund)){
-            return view('historyDetails', compact('refund'));
+            return view('historyDetails', compact('refund'), compact('expenses'));
         }
 
         return redirect('history');
