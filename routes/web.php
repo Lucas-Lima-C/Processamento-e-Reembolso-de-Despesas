@@ -33,19 +33,22 @@ Route::get('home/TypeInput', [App\Http\Controllers\Expense_TypeController::class
 
 Route::post('home/TypeInput', [App\Http\Controllers\Expense_TypeController::class, 'storeTypeInput'])->name('app.TypeInput');
 
-//Rotas do Gestor
+//Rotas do Gestor - Pendentes
 
 Route::get('admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
-
-Route::get('history', [App\Http\Controllers\HistoryController::class, 'index'])->name('app.history');
-
-route::get('history/details/{id}', [App\Http\Controllers\HistoryController::class, 'details'])->name('admin.details');
 
 route::post('admin/approve/{id}', [App\Http\Controllers\AdminController::class, 'approve'])->name('admin.approve');
 
 route::post('admin/deny/{id}', [App\Http\Controllers\AdminController::class, 'deny'])->name('admin.deny');
 
 route::get('admin/details/{id}', [App\Http\Controllers\AdminController::class, 'details'])->name('admin.details');
+
+//Histórico
+
+Route::get('history', [App\Http\Controllers\HistoryController::class, 'index'])->name('app.history');
+
+route::get('history/details/{id}', [App\Http\Controllers\HistoryController::class, 'details'])->name('admin.details');
+
 
 //Rotas de Login
 

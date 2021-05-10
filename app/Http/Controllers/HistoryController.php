@@ -14,8 +14,11 @@ class HistoryController extends Controller
     } 
     
     public function index() {
-        $refunds = Refund::with('user')->with('status_type')->get();
+
+        $refunds = Refund::with('user')->with('status_type')->where('status_type_id', 2)->paginate(5);
+
         return view('history', compact('refunds'));
+
     }
 
     public function details($id) {

@@ -36,7 +36,8 @@ class RefundController extends Controller
 
         $sessionRefund_id = 0; //Para Expense - count
         $totalValue = 0; //Para Refund
-        $userInput = false;
+        $userInput = true;
+        $userEmptyInput = 0;
 
         //Conferindo se existe um Refund e criando o valor de ID para ser utilizado pelo Expense (O expense depende de um Refund para ser criado)
 
@@ -56,33 +57,55 @@ class RefundController extends Controller
 
         $status_Types = DB::table('status_types')->where('id', 1)->value('id');
 
-        //Inserindo dados iniciais do -reembolso-
-        
+        //Checando se todos os valores foram inseridos corretamente
+
         for($i = 0; $i < 4; $i++){
-            //Checando se algum valor foi inserido
-            if($request->input("expensevalue{$i}") != 0){
-                $refund = new Refund();
-                $refund->id = $sessionRefund_id;
-                $refund->user_id = $sessionUser_id;
-                $refund->totalValue = 1;
-                $refund->status_type_id = $status_Types;
-                $refund->save();
+            //Se ele colocou um valor mas não colocou um Tipo
+            if($request->input("expensevalue{$i}") != 0 && $request->input("expensetype{$i}") == "Tipo") {
+                $userInput = false;
                 $i = 4;
-                $userInput = true;
+            } //Se ele colocou um Tipo mas não colocou um valor (0 ou NaN)
+            else if($request->input("expensevalue{$i}") == 0 && $request->input("expensetype{$i}") != "Tipo"){
+                $userInput = false;
+                $i = 4;
+            } //Se ele não colocou nenhum valor
+            else if($request->input("expensevalue{$i}") == 0 && $request->input("expensetype{$i}") == "Tipo"){
+                $userEmptyInput++;
+            }
+        }
+
+        if($userEmptyInput == 4){
+            $userInput = false;
+        }
+
+        //Inserindo dados iniciais do -reembolso
+        if($userInput == true){
+            for($i = 0; $i < 4; $i++){
+            //Checando se valores foram digitados na linha
+                if($request->input("expensevalue{$i}") != 0 && $request->input("expensetype{$i}") != "Tipo"){
+                    $refund = new Refund();
+                    $refund->id = $sessionRefund_id;
+                    $refund->user_id = $sessionUser_id;
+                    $refund->totalValue = 0;
+                    $refund->status_type_id = $status_Types;
+                    $refund->save();
+                    $i = 4;
+                }
             }
         }
 
         //Inserindo as -despesas- na DB
-
-        for($i = 0; $i < 4; $i++){
-            //Checando se tem algum valor inserido
-            if($request->input("expensevalue{$i}") != 0){
-                $expense = new Expense();
-                $expense->refund_id = $refund->id;
-                $expense->value = $request->input("expensevalue{$i}");
-                $totalValue += $request->input("expensevalue{$i}");
-                $expense->expense_type_id = $request->input("expensetype{$i}");
-                $expense->save();
+        if($userInput == true){
+            for($i = 0; $i < 4; $i++){
+            //Checando se valores foram digitados na linha
+            if($request->input("expensevalue{$i}") != 0 && $request->input("expensetype{$i}") != "Tipo"){
+                    $expense = new Expense();
+                    $expense->refund_id = $refund->id;
+                    $expense->value = $request->input("expensevalue{$i}");
+                    $totalValue += $request->input("expensevalue{$i}");
+                    $expense->expense_type_id = $request->input("expensetype{$i}");
+                    $expense->save();
+                }
             }
         }
 
@@ -94,7 +117,7 @@ class RefundController extends Controller
 
             return redirect('home')->with('error', "Solicitação de reembolso enviada com sucesso!");
         } else {
-            return redirect('home')->with('error', "Nenhum valor foi digitado, por favor tente novamente.");
+            return redirect('home')->with('error', "Houve um erro na sua solicitação, por favor tente novamente.");
         }
     }
 }

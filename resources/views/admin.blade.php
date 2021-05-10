@@ -15,12 +15,13 @@
       text-align:center
     }
 </style>
+<div style="padding:60px">
     <div class="card border">
             <div class="card-body">
                 <span class="login100-form-title" style="padding:25px; padding-top:0">
                     Reembolsos Pendentes
                 </span>
-            <table>
+            <table class="table table-hover">
                     <thead>
                         <tr style="background-color:rgb(196, 187, 187)">
                             <th>Código</th>
@@ -62,6 +63,10 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="card-footer">
+                    {{ $refunds->links() }} 
+                  </div>
             </div>
         </div>
+</div>
 @endsection

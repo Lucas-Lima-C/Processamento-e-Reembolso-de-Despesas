@@ -52,6 +52,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="card-footer">
+                    {{ $refunds->links() }} 
+                  </div>
             </div>
         </div>
 @endsection

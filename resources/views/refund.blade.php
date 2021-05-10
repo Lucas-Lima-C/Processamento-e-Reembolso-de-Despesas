@@ -14,46 +14,58 @@
 						<div style="border-style: outset; border-color:rgb(98, 248, 248); padding:6px; background-color:rgb(138, 206, 197);">
 						<form action="/home/storeRefund" method="POST" oninput="totalvalue.value=parseFloat(value0.value)+parseFloat(value1.value)+parseFloat(value2.value)+parseFloat(value3.value);">
 							@csrf
-							<label for="expensetypes"><b>Primeira despesa - Tipo: </b></label>
+							<label for="expensetypes"><b>Primeira despesa: </b></label>
 								<select id="expensetypes0" name="expensetype0" style="right:50%; margin:10px">
+									<option>Tipo</option>
 									@foreach($expense_types as $type)
 									<option value="{{$type->id}}">{{$type->name}}</option>
 									@endforeach
 								</select>
 							<label for="value"><b>Valor:</b> </label> 
 
-							<input type="number" style="border: 1px solid black; border-radius: 3px; outline:none;" id="value0" value="0" name="expensevalue0">
-
-							<label for="expensetypes"><b>Segunda despesa - Tipo:</b> </label>
+							<span style="border: 1px inset #ccc; padding:1px; background-color:white">R$
+							<input step="0.01" type="number" id="value0" value="0" name="expensevalue0">
+							</span>
+	
+							<label for="expensetypes"><b>Segunda despesa: </b> </label>
 								<select id="expensetypes1" name="expensetype1" style="margin:10px; margin-left:4px">
+									<option>Tipo</option>
 									@foreach($expense_types as $type)
 									<option value="{{$type->id}}">{{$type->name}}</option>
 									@endforeach
 								</select>
 							<label for="value"><b>Valor:</b> </label> 
 							
-							<input type="number" style="border: 1px solid black; border-radius: 3px; outline:none;" id="value1" value="0" name="expensevalue1">
-
-							<label for="expensetypes"><b>Terceira despesa - Tipo:</b> </label>
+							<span style="border: 1px inset #ccc; padding:1px; background-color:white">R$
+							<input step="0.01" type="number" id="value1" value="0" name="expensevalue1">
+							</span>
+	
+							<label for="expensetypes"><b>Terceira despesa: </b> </label>
 								<select id="expensetypes2" name="expensetype2" style="margin:10px; margin-left:10px">
+									<option>Tipo</option>
 									@foreach($expense_types as $type)
 									<option value="{{$type->id}}">{{$type->name}}</option>
 									@endforeach
 								</select>
 							<label for="value"><b>Valor:</b> </label> 
 							
-							<input type="number" style="border: 1px solid black; border-radius: 3px; outline:none;" id="value2" value="0" name="expensevalue2">
+							<span style="border: 1px inset #ccc; padding:1px; background-color:white">R$
+							<input step="0.01" type="number" id="value2" value="0" name="expensevalue2">
+							</span>
 
-							<label for="expensetypes"><b>Quarta despesa - Tipo:</b> </label>
+							<label for="expensetypes"><b>Quarta despesa: </b> </label>
 								<select id="expensetypes3" name="expensetype3" style="margin:10px; margin-left:17px">
+									<option>Tipo</option>
 									@foreach($expense_types as $type)
 									<option value="{{$type->id}}">{{$type->name}}</option>
 									@endforeach
 								</select>
 							<label for="value"><b>Valor:</b> </label> 
 							
-							<input type="number" style="border: 1px solid black; border-radius: 3px; outline:none;" id="value3" value="0" name="expensevalue3">
-						</div>						
+							<span style="border: 1px inset #ccc; padding:1px; background-color:white">R$
+							<input maxlength = "15" step="0.01" type="number" id="value3" value="0" name="expensevalue3">
+							</span>
+							</div>						
 					<div>
 						<div style="border-style: outset; border-color:rgb(98, 248, 248); padding:6px; text-align:center; background-color:rgb(183, 255, 187);">
 						<label for="totalvalue" style="font-size:20px"><b>Valor total do reembolso:</b></label>
@@ -91,9 +103,9 @@
 						<div style="position:relative; border-style: outset; border-color:rgb(98, 248, 248); width: 320px; height:100px; right:25px; background-color:rgb(138, 206, 197)">
 							<form action="/home/TypeInput" method="POST">
 								@csrf
-								<label class="login100-form-title" style="position:relative; left:0%; font-size:125%; margin:5px;">Nome: </label>
+								<label class="login100-form-title" style="position:relative; right:5px; font-size:125%; margin:5px;">Nome: </label>
 
-								<input type="string" name="expense_type_name" style="position:relative; width: 70%; left:15%; bottom:55px;
+								<input type="text" maxlength = "15" name="expense_type_name" style="position:relative; width: 50%; left:25%; bottom:55px;
 								margin: 8px 0;
 								display: inline-block;
 								border: 1px solid #ccc;
