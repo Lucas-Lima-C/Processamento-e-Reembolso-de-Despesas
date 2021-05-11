@@ -36,7 +36,7 @@
                 <tr>
                     <td>{{$refund->id}}</td>
                     <td>{{$refund->user->name}}</td>
-                    <td>R$ {{$refund->totalValue}}</td>
+                    <td>R$ {{number_format($refund->totalValue, 2, '.', ',')}}</td>
                     @if($refund->status_type->name == "Pending")
                     <td>Pendente</td>
                     @elseif($refund->status_type->name == "Approved")
