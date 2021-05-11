@@ -31,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if($refunds != null )    
+                        @if($refunds->where('status_type_id', 2)->count() != 0)    
                         @foreach($refunds as $refund)
                             @if ($refund->status_type->name == "Approved")
                         <tr>

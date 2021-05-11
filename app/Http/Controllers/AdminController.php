@@ -14,12 +14,8 @@ class AdminController extends Controller
     
     public function index() {
         //Pegando os Refunds com o Usuário e Status
-        if(Refund::all()->count() > 0){
             $refunds = Refund::with('user')->with('status_type')->where('status_type_id', 1)->paginate(5);
             return view('admin', compact('refunds'));
-        } else {
-            return view('admin');
-        }
     }
 
     public function approve($id) {

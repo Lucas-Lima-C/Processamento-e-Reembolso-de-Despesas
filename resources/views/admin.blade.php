@@ -32,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @if($refunds != null )    
+                    @if($refunds->where('status_type_id', 1)->count() != 0)    
                         @foreach($refunds as $refund)
                             @if ($refund->status_type->name == "Pending")
                         <tr>
