@@ -65,7 +65,7 @@
             @foreach($expenses as $expense)
               <tr>
                   <td>{{$expense->id}}</td>
-                  <td>R$ {{$expense->value}}</td>
+                  <td>R$ {{number_format($expense->value, 2, '.', ',')}}</td>
                   <td>{{$expense->expense_type->name}}</td>
               </tr>
               @endforeach
