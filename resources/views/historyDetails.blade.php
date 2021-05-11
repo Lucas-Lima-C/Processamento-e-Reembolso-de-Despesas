@@ -19,7 +19,7 @@
   <div class="card-body">
           <div class="form-group">
             <span class="login100-form-title" style="padding:0px; padding-bottom:15px">
-              Detalhes
+              Detalhes do Reembolso
           </span>
 
           <table>
@@ -29,7 +29,7 @@
                     <th>Funcionário</th>
                     <th>Valor Total</th>
                     <th>Status</th>
-                    <th>Data e hora da criação</th>
+                    <th>Data em que foi aprovado</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,7 +44,7 @@
                     @elseif($refund->status_type->name == "Denied")
                     <td>Negado</td>
                     @endif
-                    <td>{{$refund->created_at}}</td>
+                    <td>{{$refund->updated_at->format("d-m-Y")}}</td>
                 </tr>
             </tbody>
         </table>

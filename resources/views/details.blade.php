@@ -19,7 +19,7 @@
   <div class="card-body">
           <div class="form-group">
             <span class="login100-form-title" style="padding:0px; padding-bottom:15px">
-              Detalhes
+              Detalhes do Reembolso
           </span>
 
           <table>
@@ -29,7 +29,7 @@
                     <th>Funcionário</th>
                     <th>Valor Total</th>
                     <th>Status</th>
-                    <th>Data e hora da criação</th>
+                    <th>Data em que foi criado</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,7 +44,7 @@
                     @elseif($refund->status_type->name == "Denied")
                     <td>Negado</td>
                     @endif
-                    <td>{{$refund->created_at}}</td>
+                    <td>{{$refund->created_at->format("d-m-Y")}}</td>
                 </tr>
             </tbody>
         </table>
@@ -77,12 +77,12 @@
           <div style="position:relative; left:118px;">
           <form action="/admin/approve/{{$refund->id}}" method="POST">
             @csrf
-          <button style="float:left; height:40px; width:100px; margin-right:10px" type="submit" href="admin/approve/{{$refund->id}}" class="btn btn-sm btn-success">Aprovar</button>
+          <button onclick="return confirm('Você tem certeza que quer APROVAR este reembolso?')" style="float:left; height:40px; width:100px; margin-right:10px" type="submit" href="admin/approve/{{$refund->id}}" class="btn btn-sm btn-success">Aprovar</button>
           </form>
 
           <form action="/admin/deny/{{$refund->id}}" method="POST">
             @csrf
-          <button style="float:left; height:40px; width:100px; margin-right:10px" type="submit" href="admin/deny/{{$refund->id}}" class="btn btn-danger btn-sm">Reprovar</button>
+          <button onclick="return confirm('Você tem certeza que quer REPROVAR este reembolso?')" style="float:left; height:40px; width:100px; margin-right:10px" type="submit" href="admin/deny/{{$refund->id}}" class="btn btn-danger btn-sm">Reprovar</button>
           </form>
 
           <form action="admin" method="GET">

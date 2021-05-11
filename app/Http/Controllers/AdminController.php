@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\StatusType;
-use Illuminate\Http\Request;
 use App\Models\Refund;
-use App\Models\Status_Type;
 use Illuminate\Support\Facades\DB;
 use App\Models\Expense;
-use Illuminate\Pagination\Paginator;
 
 class AdminController extends Controller
 {
@@ -18,9 +14,12 @@ class AdminController extends Controller
     
     public function index() {
         //Pegando os Refunds com o Usuário e Status
-
-        $refunds = Refund::with('user')->with('status_type')->where('status_type_id', 1)->paginate(5);
-        return view('admin', compact('refunds'));
+        if(Refund::all()->count() > 0){
+            $refunds = Refund::with('user')->with('status_type')->where('status_type_id', 1)->paginate(5);
+            return view('admin', compact('refunds'));
+        } else {
+            return view('admin');
+        }
     }
 
     public function approve($id) {

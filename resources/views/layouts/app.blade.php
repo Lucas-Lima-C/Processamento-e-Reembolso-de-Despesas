@@ -52,13 +52,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('app.refund')}}">Reembolso</a>
+                            <a class="nav-link" href="{{route('app.refund')}}">Solicitação</a>
                           </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('admin.dashboard')}}">Pendentes</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="{{route('app.history')}}">Histórico</a>
+                              <a class="nav-link" href="{{route('app.history')}}">Aprovados</a>
                             </li>
                     </ul>
 

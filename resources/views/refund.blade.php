@@ -6,13 +6,13 @@
 			<div class="container-login100">
 				<div class="wrap-login100" style="position: absolute; width:60%; height:83%; padding:7%; right:36%;">
 
-					<span class="login100-form-title" style="position: absolute; top:7%; right:0%">
+					<span class="login100-form-title" style="pointer-events:none; position: absolute; top:7%; right:0%">
 						Formulário de Solicitação de Reembolso
 					</span>
 
 					<div>
 						<div style="border-style: outset; border-color:rgb(98, 248, 248); padding:6px; background-color:rgb(138, 206, 197);">
-						<form action="/home/storeRefund" method="POST" oninput="totalvalue.value=parseFloat(value0.value)+parseFloat(value1.value)+parseFloat(value2.value)+parseFloat(value3.value);">
+						<form action="/home/storeRefund" method="POST" oninput="totalvalue.value=(parseFloat(value0.value)+parseFloat(value1.value)+parseFloat(value2.value)+parseFloat(value3.value)).toFixed(2);">
 							@csrf
 							<label for="expensetypes"><b>Primeira despesa: </b></label>
 								<select id="expensetypes0" name="expensetype0" style="right:50%; margin:10px">
@@ -97,13 +97,13 @@
 			<div class="container-login100">
 				<div class="wrap-login100" style="position: absolute; width:30%; padding:5%; left:66%;">
 					<span class="login100-form-title" style="position: absolute; top:7%; right:0%">
-						Cadastro de Tipo de Despesa
+						Deseja cadastrar um tipo de despesa?
 					</span>
 					<div>
-						<div style="position:relative; border-style: outset; border-color:rgb(98, 248, 248); width: 320px; height:100px; right:25px; background-color:rgb(138, 206, 197)">
+						<div style="position:relative; top:15px; border-style: outset; border-color:rgb(98, 248, 248); width: 320px; height:100px; right:25px; background-color:rgb(138, 206, 197)">
 							<form action="/home/TypeInput" method="POST">
 								@csrf
-								<label class="login100-form-title" style="position:relative; right:5px; font-size:125%; margin:5px;">Nome: </label>
+								<label class="login100-form-title" style="position:relative; right:5px; font-size:125%; margin:5px;">Tipo: </label>
 
 								<input type="text" maxlength = "15" name="expense_type_name" style="position:relative; width: 50%; left:25%; bottom:55px;
 								margin: 8px 0;
@@ -112,7 +112,7 @@
 								border-radius: 4px;
 								box-sizing: border-box;">
 						</div>
-							<div style="position:relative; margin-top:10px; right:25px;">
+							<div style="position:relative; top:15px; margin-top:10px; right:25px;">
 								@if (\Session::has('errortype'))
     								<div class="alert alert-dark">
         								<ul>

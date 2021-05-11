@@ -31,6 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if($refunds != null )    
                         @foreach($refunds as $refund)
                             @if ($refund->status_type->name == "Approved")
                         <tr>
@@ -50,6 +51,11 @@
                         </tr>
                             @endif
                         @endforeach
+                        @else
+                        <span class="login100-form-title" style="padding:25px; padding-top:0">
+                            Nenhum reembolso está aprovado!
+                        </span>
+                        @endif
                     </tbody>
                 </table>
                 <div class="card-footer">

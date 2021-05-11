@@ -32,6 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @if($refunds != null )    
                         @foreach($refunds as $refund)
                             @if ($refund->status_type->name == "Pending")
                         <tr>
@@ -50,17 +51,22 @@
                                 
                                 <form style="float:left; margin-right:5px; margin-left:5px" action="/admin/approve/{{$refund->id}}" method="POST">
                                 @csrf
-                                <button href="admin/approve/{{$refund->id}}" class="btn btn-sm btn-success">Aprovar</button>
+                                <button onclick="return confirm('Você tem certeza que quer APROVAR este reembolso?')" href="admin/approve/{{$refund->id}}" class="btn btn-sm btn-success">Aprovar</button>
                                 </form>
                                 
                                 <form style="float:left;" action="/admin/approve/{{$refund->id}}" method="POST">
                                 @csrf
-                                <button href="admin/deny/{{$refund->id}}" class="btn btn-sm btn-danger" >Reprovar</button>
+                                <button onclick="return confirm('Voce tem certeza que quer REPROVAR este reembolso?')" href="admin/deny/{{$refund->id}}" class="btn btn-sm btn-danger" >Reprovar</button>
                                 </form>
                             </td>
                         </tr>
                             @endif
                         @endforeach
+                    @else
+                    <span class="login100-form-title" style="padding:25px; padding-top:0">
+                        Nenhum reembolso está pendente!
+                    </span>
+                    @endif
                     </tbody>
                 </table>
                 <div class="card-footer">
